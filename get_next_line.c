@@ -93,7 +93,7 @@ char	*get_next_line(int fd)
 	svariable = ft_update(svariable);
 	return (line);
 }
-
+/*
 #include <fcntl.h>
 #include <stdio.h>
 
@@ -117,3 +117,4 @@ int main() {
     fclose(file);
     return 0;
 }
+*/

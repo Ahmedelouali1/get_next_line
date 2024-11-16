@@ -27,11 +27,12 @@ char	*ft_update(char *str)
 		free(str);
 		return (NULL);
 	}
-	scnd_str = malloc(sizeof(char) * (ft_strlen(str - i + 1)));
+	scnd_str = malloc(sizeof(char) * (ft_strlen(str) - i + 1));
 	if (!scnd_str)
-		return (NULL);
+		return (free(str), NULL);
+	i++;
 	while (str[i] != '\0')
-		scnd_str[j] = str[i++];
+		scnd_str[j++] = str[i++];
 	scnd_str[j] = '\0';
 	free(str);
 	return (scnd_str);
@@ -90,7 +91,7 @@ char	*get_next_line(int fd)
 		return (free(svariable[fd]), svariable[fd] = 0);
 	scnd_str = svariable[fd];
 	line = ft_substr(scnd_str, 0, ft_newlinelengh(scnd_str) + 1);
-	if (!line)
+	if (!*line)
 		return (free(line), NULL);
 	svariable[fd] = ft_update(svariable[fd]);
 	return (line);
