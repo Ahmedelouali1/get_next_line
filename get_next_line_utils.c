@@ -6,7 +6,7 @@
 /*   By: ahmel-ou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 21:58:45 by ahmel-ou          #+#    #+#             */
-/*   Updated: 2024/11/10 20:52:23 by ahmel-ou         ###   ########.fr       */
+/*   Updated: 2024/11/16 18:01:10 by ahmel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	j = 0;
 	if (!s1 && !s2)
 		return (NULL);
-	if (!s1)
+	if (!s1 && s2)
 		return (ft_strdup(s2));
+	if (s1 && !s2)
+		return (ft_strdup(s1));
 	new = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!new)
 		return (NULL);

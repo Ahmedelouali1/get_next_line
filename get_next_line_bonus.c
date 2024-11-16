@@ -6,7 +6,7 @@
 /*   By: ahmel-ou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 16:21:12 by ahmel-ou          #+#    #+#             */
-/*   Updated: 2024/11/12 17:28:17 by ahmel-ou         ###   ########.fr       */
+/*   Updated: 2024/11/16 18:36:13 by ahmel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,19 @@ char	*ft_read(char *buf, char *str, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	*svariable[10240];
+	static char	**svariable[10240];
 	char		*line;
 	char		*scnd_str;
 	char		*buf;
 
+	if (BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
+		return (NULL);
+	if (svariable == NULL)
+	{
+		svariable = malloc(sizeof(char *) * 10240);
+		if (!svariable)
+			return (NULL);
+	}
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: ahmel-ou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 21:37:10 by ahmel-ou          #+#    #+#             */
-/*   Updated: 2024/11/10 16:07:53 by ahmel-ou         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:53:49 by ahmel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ char	*get_next_line(int fd)
 	char		*second_str;
 	char		*buf;
 
+	if (BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
+		return (NULL);
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);

@@ -6,11 +6,11 @@
 /*   By: ahmel-ou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:46:19 by ahmel-ou          #+#    #+#             */
-/*   Updated: 2024/11/12 15:39:02 by ahmel-ou         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:59:52 by ahmel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -34,8 +34,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	j = 0;
 	if (!s1 && !s2)
 		return (NULL);
-	if (!s1)
-		return (ft_strdup(""));
+	if (!s1 && s2)
+		return (ft_strdup(s2));
+	if(s1 && !s2)
+		return (ft_strdup(s1));
 	new = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!new)
 		return (NULL);
