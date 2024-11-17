@@ -6,7 +6,7 @@
 /*   By: ahmel-ou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 16:21:12 by ahmel-ou          #+#    #+#             */
-/*   Updated: 2024/11/16 18:36:13 by ahmel-ou         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:54:24 by ahmel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@ char	*ft_update(char *str)
 	j = 0;
 	while (str[i] != '\n' && str[i] != '\0')
 		i++;
-	if (!str)
+	if (!str[i])
 	{
 		free(str);
 		return (NULL);
 	}
 	scnd_str = malloc(sizeof(char) * (ft_strlen(str) - i + 1));
 	if (!scnd_str)
-		return (free(str), NULL);
+	{
+		free(str);
+		return (NULL);
+	}
 	i++;
 	while (str[i] != '\0')
 		scnd_str[j++] = str[i++];
@@ -76,19 +79,13 @@ char	*ft_read(char *buf, char *str, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	**svariable[10240];
+	static char	*svariable[10240];
 	char		*line;
-	char		*scnd_str;
+//	char		*scnd_str;
 	char		*buf;
 
-	if (BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= 10240)
 		return (NULL);
-	if (svariable == NULL)
-	{
-		svariable = malloc(sizeof(char *) * 10240);
-		if (!svariable)
-			return (NULL);
-	}
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
@@ -97,16 +94,15 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (*svariable[fd] == '\0')
 		return (free(svariable[fd]), svariable[fd] = 0);
-	scnd_str = svariable[fd];
-	line = ft_substr(scnd_str, 0, ft_newlinelengh(scnd_str) + 1);
+//	scnd_str = svariable[fd];
+	line = ft_substr(svariable[fd], 0, ft_newlinelengh(svariable[fd]) + 1);
 	if (!*line)
 		return (free(line), NULL);
 	svariable[fd] = ft_update(svariable[fd]);
 	return (line);
 }
-/*
-#include <fcntl.h>
 
+#include <fcntl.h>
 int main()
 {
 	int fd = open("test.txt", O_CREAT | O_RDWR, 0777);
@@ -117,7 +113,7 @@ int main()
 	printf("%s", get_next_line(fd1));
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd1));
-}*/
+}
 /*
 #include <fcntl.h>
 #include <stdio.h>
