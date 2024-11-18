@@ -6,7 +6,7 @@
 /*   By: ahmel-ou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 16:21:12 by ahmel-ou          #+#    #+#             */
-/*   Updated: 2024/11/17 18:54:24 by ahmel-ou         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:26:32 by ahmel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ char	*get_next_line(int fd)
 {
 	static char	*svariable[10240];
 	char		*line;
-//	char		*scnd_str;
 	char		*buf;
+	char		*scnd_str;
 
-	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= 10240)
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= 10240 || BUFFER_SIZE > 2147483647)
 		return (NULL);
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
@@ -94,14 +94,14 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (*svariable[fd] == '\0')
 		return (free(svariable[fd]), svariable[fd] = 0);
-//	scnd_str = svariable[fd];
-	line = ft_substr(svariable[fd], 0, ft_newlinelengh(svariable[fd]) + 1);
+	scnd_str = svariable[fd];
+	line = ft_substr(scnd_str, 0, ft_newlinelengh(scnd_str) + 1);
 	if (!*line)
 		return (free(line), NULL);
 	svariable[fd] = ft_update(svariable[fd]);
 	return (line);
 }
-
+/*
 #include <fcntl.h>
 int main()
 {
@@ -113,7 +113,7 @@ int main()
 	printf("%s", get_next_line(fd1));
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd1));
-}
+}*/
 /*
 #include <fcntl.h>
 #include <stdio.h>

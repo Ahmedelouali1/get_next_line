@@ -6,7 +6,7 @@
 /*   By: ahmel-ou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 21:58:45 by ahmel-ou          #+#    #+#             */
-/*   Updated: 2024/11/17 15:48:54 by ahmel-ou         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:35:28 by ahmel-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!string)
 		return (NULL);
 	while (i < len)
-	{	string[i] = s[start + i];
+	{
+		string[i] = s[start + i];
 		i++;
 	}
 	string[i] = '\0';
